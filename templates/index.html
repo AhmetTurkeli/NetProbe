@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetProbe - Ağ Güvenlik Tarama Aracı</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NetProbe</h1>
+            <p>Ağ Güvenlik Tarama Aracı</p>
+        </header>
+
+        <div class="connection-status">
+            <span id="status-indicator" class="disconnected"></span>
+            <span id="status-text">Sunucuya bağlanıyor...</span>
+        </div>
+
+        <div class="scan-form">
+            <h2>IP Adresi Tarama</h2>
+            <div class="input-group">
+                <input type="text" id="ip-address" placeholder="IP adresi girin (örn. 192.168.1.1)">
+                <button id="scan-button" disabled>Taramaya Başla</button>
+            </div>
+        </div>
+
+        <div id="loading-indicator" class="hidden">
+            <div class="spinner"></div>
+            <p>Tarama yapılıyor, lütfen bekleyin...</p>
+        </div>
+
+        <div id="error-message" class="hidden">
+            <p class="error"></p>
+        </div>
+
+        <div id="scan-results" class="hidden">
+            <div class="results-container">
+                <h2>Tarama Sonuçları</h2>
+                <div class="result-item">
+                    <h3>IP Adresi</h3>
+                    <p id="result-ip"></p>
+                </div>
+                <div class="result-item">
+                    <h3>İşletim Sistemi</h3>
+                    <p id="result-os"></p>
+                </div>
+                <div class="result-item">
+                    <h3>Hedef Durumu</h3>
+                    <div id="host-status-container">
+                        <p id="host-status-message"></p>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <h3>Açık Portlar ve Servisler</h3>
+                    <div id="ports-table-container">
+                        <table id="ports-table">
+                            <thead>
+                                <tr>
+                                    <th>Port</th>
+                                    <th>Protokol</th>
+                                    <th>Servis</th>
+                                    <th>Versiyon</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ports-list">
+                                <!-- Port rows will be added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 NetProbe | Ağ Güvenlik Tarama Aracı</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 
